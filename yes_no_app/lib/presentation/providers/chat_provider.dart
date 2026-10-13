@@ -7,7 +7,7 @@ class ChatProvider extends ChangeNotifier {
   final getYesNoAnswer = GetYesNoAnswer();
   List<Message> messageList = [
     Message(text: 'Hola', fromWho: FromWho.me),
-    Message(text: 'Hola, que tal', fromWho: FromWho.me),
+    Message(text: 'Hola, que tal?', fromWho: FromWho.me),
   ];
 
   Future<void> sendMessage(String text) async {
@@ -23,6 +23,9 @@ class ChatProvider extends ChangeNotifier {
 
   Future<void> herReply() async {
     final herMessage = await getYesNoAnswer.getAnswer();
+    messageList.add(herMessage);
+    notifyListeners();
+    scrollToBottom();
   }
 
   Future<void> scrollToBottom() async {
